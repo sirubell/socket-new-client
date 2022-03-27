@@ -43,12 +43,28 @@ namespace new_client
         {
             Thread t1 = new Thread(TalkToServer);
             t1.Start();
+            button1.Visible = false;
+        }
+
+        static public long GetCurrentTimeMS()
+        {
+            return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         }
 
         private void TalkToServer()
         {
-            SendDirection();
-            ReceiveEnvironment();
+            long previousTime = GetCurrentTimeMS();
+            while (true)
+            {
+                long currentTime = GetCurrentTimeMS();
+                if  (currentTime >= previousTime + 5)
+                {
+                    previousTime = currentTime;
+
+                    SendDirection();
+                    ReceiveEnvironment();
+                }
+            }
         }
 
         private void SendDirection()
