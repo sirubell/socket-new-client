@@ -2,12 +2,38 @@ using System.Net.Sockets;
 using System.Drawing;
 
 namespace new_client
-{
+{ 
     public partial class Form1 : Form
     {
+        string dir = "1";
         public Form1()
         {
             InitializeComponent();
+
+            KeyDown += Form1_KeyDown;
+            KeyUp += Form1_KeyUp;
+        }
+
+        private void Form1_KeyDown(object? sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.A:
+                case Keys.Left:
+                    dir = "2";
+                    break;
+                case Keys.D:
+                case Keys.Right:
+                    dir = "3";
+                    break;
+
+            }
+        }
+
+        private void Form1_KeyUp(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left || e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+                dir = "1";
         }
 
         bool Connect(string server)
@@ -30,7 +56,10 @@ namespace new_client
             if (!Connect("127.0.0.1"))
             {
                 Close();
+                return;
             }
+            Thread t1 = new Thread(TalkToServer);
+            t1.Start();
         }
         private void Form1_Closing(object sender, EventArgs e)
         {
@@ -40,12 +69,6 @@ namespace new_client
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Thread t1 = new Thread(TalkToServer);
-            t1.Start();
-            button1.Visible = false;
-        }
 
         static public long GetCurrentTimeMS()
         {
@@ -70,9 +93,7 @@ namespace new_client
 
         private void SendDirection()
         {
-            if (textBox1.Text == String.Empty) return;
-
-            Byte[] data = System.Text.Encoding.ASCII.GetBytes(textBox1.Text);
+            Byte[] data = System.Text.Encoding.ASCII.GetBytes(dir);
             NetworkStream stream = client.GetStream();
 
             stream.Write(data, 0, data.Length);
