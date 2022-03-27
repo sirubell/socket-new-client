@@ -53,7 +53,7 @@ namespace new_client
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!Connect("127.0.0.1"))
+            if (!Connect("10.201.0.168"))
             {
                 Close();
                 return;
@@ -185,6 +185,11 @@ namespace new_client
                     Invoke(() => { Controls.Add(picture); });
                 };
             }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
