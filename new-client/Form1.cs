@@ -1,4 +1,5 @@
 using System.Net.Sockets;
+using System.Drawing;
 
 namespace new_client
 {
@@ -99,73 +100,69 @@ namespace new_client
 
             Invoke(() => { richTextBox1.Text = display; });
 
-
             UpdatePlayerBlock(players);
             UpdatePlatformBlock(blocks);
-
-            
         }
 
-        List<PictureBox> pbs = new List<PictureBox>();
         void UpdatePlayerBlock(string[] players)
         {
-            Invoke(() =>
+            for (int i = 0; i < players.Length; i++)
             {
-                foreach (PictureBox pb in pbs)
-                {
-                    Controls.Remove(pb);
-                    pb.Dispose();
-                }
-                pbs.Clear();
-            });
-
-
-            foreach (string player in players)
-            {
-                string[] playerData = player.Split(',');
+                string[] playerData = players[i].Split(',');
                 PlayerBlock pb = new PlayerBlock(playerData);
 
-                var picture = new PictureBox
+                try
                 {
-                    // Name = pb.name,
-                    Size = new Size(pb.w, pb.h),
-                    Location = new Point(pb.x, pb.y),
-                    BackColor = Color.Black,
-                };
-                pbs.Add(picture);
+                    PictureBox pictureBox = (PictureBox)Controls.Find($"player{i}", true)[0];
+                    Invoke(() => {
+                        pictureBox.Size = new Size(pb.w, pb.h);
+                        pictureBox.Location = new Point(pb.x, pb.y);
+                    });
+                    
+                }
+                catch (Exception ex)
+                {
+                    var picture = new PictureBox
+                    {
+                        Name = $"player{i}",
+                        Size = new Size(pb.w, pb.h),
+                        Location = new Point(pb.x, pb.y),
+                        BackColor = Color.Black,
+                    };
 
-                Invoke(() => { Controls.Add(picture); });
+                    Invoke(() => { Controls.Add(picture); });
+                };
             }
         }
 
-        List<PictureBox> pfs = new List<PictureBox>();
         void UpdatePlatformBlock(string[] blocks)
         {
-            Invoke(() =>
+            for (int i = 0; i < blocks.Length; i++)
             {
-                foreach (PictureBox pf in pfs)
+                string[] blockData = blocks[i].Split(',');
+                FlatformBlock pf = new FlatformBlock(blockData);
+
+                try
                 {
-                    Controls.Remove(pf);
-                    pf.Dispose();
+                    PictureBox flatformBlock = (PictureBox)Controls.Find($"block{i}", true)[0];
+                    Invoke(() => {
+                        flatformBlock.Size = new Size(pf.w, pf.h);
+                        flatformBlock.Location = new Point(pf.x, pf.y);
+                    });
+
                 }
-                pfs.Clear();
-            });
-
-
-            foreach (string block in blocks)
-            {
-                string[] blockData = block.Split(',');
-                FlatformBlock pb = new FlatformBlock(blockData);
-
-                var picture = new PictureBox
+                catch (Exception ex)
                 {
-                    Size = new Size(pb.w, pb.h),
-                    Location = new Point(pb.x, pb.y),
-                    BackColor = Color.Blue,
-                };
-                pbs.Add(picture);
+                    var picture = new PictureBox
+                    {
+                        Name = $"block{i}",
+                        Size = new Size(pf.w, pf.h),
+                        Location = new Point(pf.x, pf.y),
+                        BackColor = Color.Blue,
+                    };
 
-                Invoke(() => { Controls.Add(picture); });
+                    Invoke(() => { Controls.Add(picture); });
+                };
             }
         }
     }
