@@ -37,22 +37,22 @@ namespace new_client
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(326, 80);
+            this.textBox1.Location = new System.Drawing.Point(642, 21);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(125, 27);
             this.textBox1.TabIndex = 0;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(169, 241);
+            this.richTextBox1.Location = new System.Drawing.Point(33, 21);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(457, 120);
+            this.richTextBox1.Size = new System.Drawing.Size(457, 76);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(282, 158);
+            this.button1.Location = new System.Drawing.Point(551, 68);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 29);
             this.button1.TabIndex = 2;

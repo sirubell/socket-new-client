@@ -61,7 +61,7 @@ namespace new_client
             stream.Write(data, 0, data.Length);
         }
 
-        List<PictureBox> pbs = new List<PictureBox>();
+        
         private void ReceiveEnvironment()
         {
             Byte[] buffer = new Byte[256];
@@ -71,8 +71,6 @@ namespace new_client
             Int32 bytes = stream.Read(buffer, 0, buffer.Length);
 
             responseData = System.Text.Encoding.ASCII.GetString(buffer, 0, bytes);
-            
-            
 
             string[] chunks = responseData.Split('\n');
 
@@ -81,14 +79,20 @@ namespace new_client
             string[] blocks = chunks[2].Split('|');
             int time_elpsed = Convert.ToInt32(chunks[3]);
 
-            string display = String.Empty;
-            for (int i = 4; i < chunks.Length; i++)
-            {
-                display += chunks[i];
-            }
+            string display = String.Join('\n', new ArraySegment<string>(chunks, 4, chunks.Length - 4));
 
             Invoke(() => { richTextBox1.Text = display; });
 
+
+            UpdatePlayerBlock(players);
+            UpdatePlatformBlock(blocks);
+
+            
+        }
+
+        List<PictureBox> pbs = new List<PictureBox>();
+        void UpdatePlayerBlock(string[] players)
+        {
             Invoke(() =>
             {
                 foreach (PictureBox pb in pbs)
@@ -98,7 +102,7 @@ namespace new_client
                 }
                 pbs.Clear();
             });
-            
+
 
             foreach (string player in players)
             {
@@ -107,7 +111,7 @@ namespace new_client
 
                 var picture = new PictureBox
                 {
-                    Name = pb.name,
+                    // Name = pb.name,
                     Size = new Size(pb.w, pb.h),
                     Location = new Point(pb.x, pb.y),
                     BackColor = Color.Black,
@@ -118,6 +122,36 @@ namespace new_client
             }
         }
 
+        List<PictureBox> pfs = new List<PictureBox>();
+        void UpdatePlatformBlock(string[] blocks)
+        {
+            Invoke(() =>
+            {
+                foreach (PictureBox pf in pfs)
+                {
+                    Controls.Remove(pf);
+                    pf.Dispose();
+                }
+                pfs.Clear();
+            });
+
+
+            foreach (string block in blocks)
+            {
+                string[] blockData = block.Split(',');
+                FlatformBlock pb = new FlatformBlock(blockData);
+
+                var picture = new PictureBox
+                {
+                    Size = new Size(pb.w, pb.h),
+                    Location = new Point(pb.x, pb.y),
+                    BackColor = Color.Blue,
+                };
+                pbs.Add(picture);
+
+                Invoke(() => { Controls.Add(picture); });
+            }
+        }
     }
 }
 
@@ -139,4 +173,22 @@ class PlayerBlock
         heart = Convert.ToInt32(data[4]);
         name = data[5];
     }
+}
+
+class FlatformBlock
+{
+    public int x;
+    public int y;
+    public int w;
+    public int h;
+    public int type;
+
+public FlatformBlock(string[] data)
+{
+    x = Convert.ToInt32(data[0]);
+    y = Convert.ToInt32(data[1]);
+    w = Convert.ToInt32(data[2]);
+    h = Convert.ToInt32(data[3]);
+    type = Convert.ToInt32(data[4]);
+}
 }
