@@ -313,7 +313,6 @@ namespace new_client
                 var picture = new PictureBox();
 
                 pfs.Add(picture);
-
                 Invoke(() =>Controls.Add(picture));
             }
             while (pfs.Count > blocks.Length)
@@ -332,7 +331,8 @@ namespace new_client
                 {
                     pfs[i].Size = new Size(pf.w, pf.h);
                     pfs[i].Location = new Point(pf.x, pf.y);
-                    pfs[i].BackColor = (pf.type == 1 ? Color.Blue : Color.Red);
+                    pfs[i].Image = (pf.type == 1 ? Properties.Resources.platform: Properties.Resources.thorn);
+                    pfs[i].SizeMode = PictureBoxSizeMode.StretchImage;
                 });
                 
             }
