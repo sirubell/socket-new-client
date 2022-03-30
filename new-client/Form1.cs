@@ -53,7 +53,7 @@ namespace new_client
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!Connect("10.201.0.168"))
+            if (!Connect("127.0.0.1"))
             {
                 Close();
                 return;
@@ -121,38 +121,38 @@ namespace new_client
 
             Invoke(() => { richTextBox1.Text = display; });
 
-            UpdatePlayerBlock(players);
+            UpdatePlayerBlock(players, myName);
             UpdatePlatformBlock(blocks);
         }
 
-        void UpdatePlayerBlock(string[] players)
+        List<PictureBox> pbs = new List<PictureBox>();
+        void UpdatePlayerBlock(string[] players, string myName)
         {
-            for (int i = 0; i < players.Length; i++)
+            while (pbs.Count < players.Length)
+            {
+                var picture = new PictureBox();
+
+                pbs.Add(picture);
+
+                Invoke( () => Controls.Add(picture));
+            }
+            while (pbs.Count > players.Length)
+            {
+                Invoke(() => Controls.Remove(pbs.Last()));
+                pbs.RemoveAt(pbs.Count - 1);
+            }
+
+            for (int i = 0; i < pbs.Count; i++)
             {
                 string[] playerData = players[i].Split(',');
                 PlayerBlock pb = new PlayerBlock(playerData);
 
-                try
+                Invoke(() =>
                 {
-                    PictureBox pictureBox = (PictureBox)Controls.Find($"player{i}", true)[0];
-                    Invoke(() => {
-                        pictureBox.Size = new Size(pb.w, pb.h);
-                        pictureBox.Location = new Point(pb.x, pb.y);
-                    });
-                    
-                }
-                catch (Exception ex)
-                {
-                    var picture = new PictureBox
-                    {
-                        Name = $"player{i}",
-                        Size = new Size(pb.w, pb.h),
-                        Location = new Point(pb.x, pb.y),
-                        BackColor = Color.Black,
-                    };
-
-                    Invoke(() => { Controls.Add(picture); });
-                };
+                    pbs[i].Size = new Size(pb.w, pb.h);
+                    pbs[i].Location = new Point(pb.x, pb.y);
+                    pbs[i].BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
+                });
             }
         }
 
