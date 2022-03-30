@@ -141,7 +141,7 @@ namespace new_client
                         pictureBox1.BackColor = Color.Transparent;
                         pictureBox1.Visible = true;
                         pictureBox2.Visible = false;
-                        pictureBox1.Location = new Point(300, 300);
+                        pictureBox1.Location = new Point(200, 300);
                     });
                 }
                 else
@@ -150,8 +150,8 @@ namespace new_client
                     {
                         pictureBox1.Visible = true;
                         pictureBox2.Visible = true;
-                        pictureBox1.Location = new Point(215, 300);
-                        pictureBox2.Location = new Point(385, 300);
+                        pictureBox1.Location = new Point(115, 300);
+                        pictureBox2.Location = new Point(285, 300);
                     });
                     
                 }
@@ -258,10 +258,11 @@ namespace new_client
 
                 pbs.Add(new PlayerBlockControl(picture, label));
 
-                Invoke( () =>
+                Invoke(() =>
                 {
                     Controls.Add(picture);
                     Controls.Add(label);
+                    picture.BringToFront();
                 });
             }
             while (pbs.Count > players.Length)
