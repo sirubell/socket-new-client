@@ -125,20 +125,30 @@ namespace new_client
             UpdatePlatformBlock(blocks);
         }
 
-        List<PictureBox> pbs = new List<PictureBox>();
+        List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
         void UpdatePlayerBlock(string[] players, string myName)
         {
             while (pbs.Count < players.Length)
             {
                 var picture = new PictureBox();
+                var label = new Label();
 
-                pbs.Add(picture);
+                pbs.Add(new PlayerBlockControl(picture, label));
 
-                Invoke( () => Controls.Add(picture));
+                Invoke( () =>
+                {
+                    Controls.Add(picture);
+                    Controls.Add(label);
+                });
             }
             while (pbs.Count > players.Length)
             {
-                Invoke(() => Controls.Remove(pbs.Last()));
+                var control = pbs.Last();
+                Invoke(() =>
+                {
+                    Controls.Remove(control.pictureBox);
+                    Controls.Remove(control.label);
+                });
                 pbs.RemoveAt(pbs.Count - 1);
             }
 
@@ -149,9 +159,13 @@ namespace new_client
 
                 Invoke(() =>
                 {
-                    pbs[i].Size = new Size(pb.w, pb.h);
-                    pbs[i].Location = new Point(pb.x, pb.y);
-                    pbs[i].BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
+                    pbs[i].pictureBox.Size = new Size(pb.w, pb.h);
+                    pbs[i].pictureBox.Location = new Point(pb.x, pb.y);
+                    pbs[i].pictureBox.BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
+
+                    pbs[i].label.Text = pb.heart;
+                    pbs[i].label.Size = new Size(100, 30);
+                    pbs[i].label.Location = new Point(pb.x, pb.y - 20);
                 });
             }
         }
@@ -211,6 +225,18 @@ class PlayerBlock
         h = Convert.ToInt32(data[3]);
         heart = Convert.ToInt32(data[4]);
         name = data[5];
+    }
+}
+
+class PlayerBlockControl
+{
+    public PictureBox pictureBox;
+    public Label label;
+
+    public PlayerBlockControl(PictureBox _pictureBox, Label _label)
+    {
+        pictureBox = _pictureBox;
+        label = _label;
     }
 }
 
