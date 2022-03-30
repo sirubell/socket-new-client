@@ -164,7 +164,7 @@ namespace new_client
                     pbs[i].pictureBox.BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
 
                     pbs[i].label.Text = "HP: " + Convert.ToString(pb.heart);
-                    pbs[i].label.Size = new Size(100, 30);
+                    pbs[i].label.Size = new Size(70, 30);
                     pbs[i].label.Location = new Point(pb.x, pb.y - 20);
                 });
 
@@ -181,34 +181,38 @@ namespace new_client
             }
         }
 
+        List<PictureBox> pfs = new List<PictureBox>();
         void UpdatePlatformBlock(string[] blocks)
         {
+            if (blocks.Length == 0 || blocks[0] == String.Empty) return;
+
+            while (pfs.Count < blocks.Length)
+            {
+                var picture = new PictureBox();
+
+                pfs.Add(picture);
+
+                Invoke(() =>Controls.Add(picture));
+            }
+            while (pfs.Count > blocks.Length)
+            {
+                var block = pfs.Last();
+                Invoke(() => Controls.Remove(block));
+                pfs.RemoveAt(pfs.Count - 1);
+            }
+
             for (int i = 0; i < blocks.Length; i++)
             {
                 string[] blockData = blocks[i].Split(',');
                 FlatformBlock pf = new FlatformBlock(blockData);
 
-                try
+                Invoke(() =>
                 {
-                    PictureBox flatformBlock = (PictureBox)Controls.Find($"block{i}", true)[0];
-                    Invoke(() => {
-                        flatformBlock.Size = new Size(pf.w, pf.h);
-                        flatformBlock.Location = new Point(pf.x, pf.y);
-                    });
-
-                }
-                catch (Exception ex)
-                {
-                    var picture = new PictureBox
-                    {
-                        Name = $"block{i}",
-                        Size = new Size(pf.w, pf.h),
-                        Location = new Point(pf.x, pf.y),
-                        BackColor = Color.Blue,
-                    };
-
-                    Invoke(() => { Controls.Add(picture); });
-                };
+                    pfs[i].Size = new Size(pf.w, pf.h);
+                    pfs[i].Location = new Point(pf.x, pf.y);
+                    pfs[i].BackColor = (pf.type == 1 ? Color.Blue : Color.Red);
+                });
+                
             }
         }
 
@@ -259,12 +263,12 @@ class FlatformBlock
     public int h;
     public int type;
 
-public FlatformBlock(string[] data)
-{
-    x = Convert.ToInt32(data[0]);
-    y = Convert.ToInt32(data[1]);
-    w = Convert.ToInt32(data[2]);
-    h = Convert.ToInt32(data[3]);
-    type = Convert.ToInt32(data[4]);
-}
+    public FlatformBlock(string[] data)
+    {
+        x = Convert.ToInt32(data[0]);
+        y = Convert.ToInt32(data[1]);
+        w = Convert.ToInt32(data[2]);
+        h = Convert.ToInt32(data[3]);
+        type = Convert.ToInt32(data[4]);
+    }
 }
