@@ -53,6 +53,7 @@ namespace new_client
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Size = new Size(600, 900);
             if (!Connect("10.201.32.122"))
             {
                 Close();
