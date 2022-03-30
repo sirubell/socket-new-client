@@ -36,7 +36,7 @@ namespace new_client
             // richTextBox1
             // 
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(342, 1);
+            this.richTextBox1.Location = new System.Drawing.Point(178, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(239, 76);
             this.richTextBox1.TabIndex = 1;
