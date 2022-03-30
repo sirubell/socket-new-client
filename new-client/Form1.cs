@@ -169,7 +169,7 @@ namespace new_client
                 });
 
                 Graphics graphic = pbs[i].pictureBox.CreateGraphics();
-                Font drawFont = new Font("Consolas", 6);
+                Font drawFont = new Font("Consolas", 24);
                 SolidBrush drawBrush = new SolidBrush(Color.Black);
                 float x = 0.0F;
                 float y = 20.0F;
