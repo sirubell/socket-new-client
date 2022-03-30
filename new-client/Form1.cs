@@ -240,14 +240,24 @@ namespace new_client
             while (pbs.Count < players.Length)
             {
                 var picture = new PictureBox();
+                var label = new Label();
 
-                pbs.Add(picture);
+                pbs.Add(new PlayerBlockControl(picture, label));
 
-                Invoke( () => Controls.Add(picture));
+                Invoke( () =>
+                {
+                    Controls.Add(picture);
+                    Controls.Add(label);
+                });
             }
             while (pbs.Count > players.Length)
             {
-                Invoke(() => Controls.Remove(pbs.Last()));
+                var control = pbs.Last();
+                Invoke(() =>
+                {
+                    Controls.Remove(control.pictureBox);
+                    Controls.Remove(control.label);
+                });
                 pbs.RemoveAt(pbs.Count - 1);
             }
 
@@ -258,42 +268,66 @@ namespace new_client
 
                 Invoke(() =>
                 {
-                    pbs[i].Size = new Size(pb.w, pb.h);
-                    pbs[i].Location = new Point(pb.x, pb.y);
-                    pbs[i].BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
+                    pbs[i].pictureBox.Size = new Size(pb.w, pb.h);
+                    pbs[i].pictureBox.Location = new Point(pb.x, pb.y);
+                    pbs[i].pictureBox.BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
+
+                    pbs[i].label.Text = "HP: " + Convert.ToString(pb.heart);
+                    pbs[i].label.Size = new Size(70, 30);
+                    pbs[i].label.Location = new Point(pb.x, pb.y - 20);
                 });
+
+                Graphics graphic = pbs[i].pictureBox.CreateGraphics();
+                Font drawFont = new Font("Serif", 30);
+                SolidBrush drawBrush = new SolidBrush(Color.Black);
+                float x = 0.0F;
+                float y = 20.0F;
+                StringFormat drawFormat = new StringFormat();
+                drawFormat.LineAlignment = StringAlignment.Center;
+
+                Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
+
             }
         }
 
+        List<PictureBox> pfs = new List<PictureBox>();
         void UpdatePlatformBlock(string[] blocks)
         {
+            if (blocks.Length == 0 || blocks[0] == String.Empty) return;
+
+            while (pfs.Count < blocks.Length)
+            {
+                var picture = new PictureBox();
+
+                pfs.Add(picture);
+
+                Invoke(() =>Controls.Add(picture));
+            }
+            while (pfs.Count > blocks.Length)
+            {
+                var block = pfs.Last();
+                Invoke(() => Controls.Remove(block));
+                pfs.RemoveAt(pfs.Count - 1);
+            }
+
             for (int i = 0; i < blocks.Length; i++)
             {
                 string[] blockData = blocks[i].Split(',');
                 FlatformBlock pf = new FlatformBlock(blockData);
 
-                try
+                Invoke(() =>
                 {
-                    PictureBox flatformBlock = (PictureBox)Controls.Find($"block{i}", true)[0];
-                    Invoke(() => {
-                        flatformBlock.Size = new Size(pf.w, pf.h);
-                        flatformBlock.Location = new Point(pf.x, pf.y);
-                    });
-
-                }
-                catch (Exception ex)
-                {
-                    var picture = new PictureBox
-                    {
-                        Name = $"block{i}",
-                        Size = new Size(pf.w, pf.h),
-                        Location = new Point(pf.x, pf.y),
-                        BackColor = Color.Blue,
-                    };
-
-                    Invoke(() => { Controls.Add(picture); });
-                };
+                    pfs[i].Size = new Size(pf.w, pf.h);
+                    pfs[i].Location = new Point(pf.x, pf.y);
+                    pfs[i].BackColor = (pf.type == 1 ? Color.Blue : Color.Red);
+                });
+                
             }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
@@ -318,6 +352,18 @@ class PlayerBlock
     }
 }
 
+class PlayerBlockControl
+{
+    public PictureBox pictureBox;
+    public Label label;
+
+    public PlayerBlockControl(PictureBox _pictureBox, Label _label)
+    {
+        pictureBox = _pictureBox;
+        label = _label;
+    }
+}
+
 class FlatformBlock
 {
     public int x;
@@ -326,12 +372,12 @@ class FlatformBlock
     public int h;
     public int type;
 
-public FlatformBlock(string[] data)
-{
-    x = Convert.ToInt32(data[0]);
-    y = Convert.ToInt32(data[1]);
-    w = Convert.ToInt32(data[2]);
-    h = Convert.ToInt32(data[3]);
-    type = Convert.ToInt32(data[4]);
-}
+    public FlatformBlock(string[] data)
+    {
+        x = Convert.ToInt32(data[0]);
+        y = Convert.ToInt32(data[1]);
+        w = Convert.ToInt32(data[2]);
+        h = Convert.ToInt32(data[3]);
+        type = Convert.ToInt32(data[4]);
+    }
 }
