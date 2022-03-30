@@ -53,7 +53,7 @@ namespace new_client
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!Connect("127.0.0.1"))
+            if (!Connect("10.201.32.122"))
             {
                 Close();
                 return;
