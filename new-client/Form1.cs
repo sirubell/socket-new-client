@@ -163,10 +163,21 @@ namespace new_client
                     pbs[i].pictureBox.Location = new Point(pb.x, pb.y);
                     pbs[i].pictureBox.BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
 
-                    pbs[i].label.Text = pb.heart;
+                    pbs[i].label.Text = "HP: " + Convert.ToString(pb.heart);
                     pbs[i].label.Size = new Size(100, 30);
                     pbs[i].label.Location = new Point(pb.x, pb.y - 20);
                 });
+
+                Graphics graphic = pbs[i].pictureBox.CreateGraphics();
+                Font drawFont = new Font("Consolas", 6);
+                SolidBrush drawBrush = new SolidBrush(Color.Black);
+                float x = 0.0F;
+                float y = 20.0F;
+                StringFormat drawFormat = new StringFormat();
+                drawFormat.LineAlignment = StringAlignment.Center;
+
+                Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
+
             }
         }
 
