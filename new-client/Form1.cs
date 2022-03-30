@@ -135,106 +135,119 @@ namespace new_client
             {
                 if (Int32.Parse(statement[statement.Length - 1]) < 10)
                 {
-                    pictureBox1.BackColor = Color.Transparent;
-                    pictureBox1.Visible = true;
-                    pictureBox2.Visible = false;
-                    pictureBox1.Location = new Point(300, 300);
+                    Invoke(() =>
+                    {
+                        pictureBox1.BackColor = Color.Transparent;
+                        pictureBox1.Visible = true;
+                        pictureBox2.Visible = false;
+                        pictureBox1.Location = new Point(300, 300);
+                    });
                 }
                 else
                 {
-                    pictureBox1.Visible = true;
-                    pictureBox2.Visible = true;
-                    pictureBox1.Location = new Point(215, 300);
-                    pictureBox2.Location = new Point(385, 300);
+                    Invoke(() =>
+                    {
+                        pictureBox1.Visible = true;
+                        pictureBox2.Visible = true;
+                        pictureBox1.Location = new Point(215, 300);
+                        pictureBox2.Location = new Point(385, 300);
+                    });
+                    
                 }
 
-
-                switch (Int32.Parse(statement[statement.Length - 1]))
+                Invoke(() =>
                 {
-                    case 1:
-                        pictureBox1.BackColor = Color.Red;
-                        pictureBox1.Image = Properties.Resources._1;
-                        break;
-                    case 2:
-                        pictureBox1.BackColor = Color.Red;
-                        pictureBox1.Image = Properties.Resources._2;
-                        break;
-                    case 3:
-                        pictureBox1.BackColor = Color.Red;
-                        pictureBox1.Image = Properties.Resources._3;
-                        break;
-                    case 4:
-                        pictureBox1.Image = Properties.Resources._4;
-                        break;
-                    case 5:
-                        pictureBox1.Image = Properties.Resources._5;
-                        break;
-                    case 6:
-                        pictureBox1.Image = Properties.Resources._6;
-                        break;
-                    case 7:
-                        pictureBox1.Image = Properties.Resources._7;
-                        break;
-                    case 8:
-                        pictureBox1.Image = Properties.Resources._8;
-                        break;
-                    case 9:
-                        pictureBox1.Image = Properties.Resources._9;
-                        break;
-                    case 10:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._0;
-                        break;
-                    case 11:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._1;
-                        break;
-                    case 12:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._2;
-                        break;
-                    case 13:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._3;
-                        break;
-                    case 14:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._4;
-                        break;
-                    case 15:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._5;
-                        break;
-                    case 16:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._6;
-                        break;
-                    case 17:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._7;
-                        break;
-                    case 18:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._8;
-                        break;
-                    case 19:
-                        pictureBox1.Image = Properties.Resources._1;
-                        pictureBox2.Image = Properties.Resources._9;
-                        break;
-                    case 20:
-                        pictureBox1.Image = Properties.Resources._2;
-                        pictureBox2.Image = Properties.Resources._0;
-                        break;
-                }
+                    switch (Int32.Parse(statement[statement.Length - 1]))
+                    {
+                        case 1:
+                            pictureBox1.BackColor = Color.Red;
+                            pictureBox1.Image = Properties.Resources._1;
+                            break;
+                        case 2:
+                            pictureBox1.BackColor = Color.Red;
+                            pictureBox1.Image = Properties.Resources._2;
+                            break;
+                        case 3:
+                            pictureBox1.BackColor = Color.Red;
+                            pictureBox1.Image = Properties.Resources._3;
+                            break;
+                        case 4:
+                            pictureBox1.Image = Properties.Resources._4;
+                            break;
+                        case 5:
+                            pictureBox1.Image = Properties.Resources._5;
+                            break;
+                        case 6:
+                            pictureBox1.Image = Properties.Resources._6;
+                            break;
+                        case 7:
+                            pictureBox1.Image = Properties.Resources._7;
+                            break;
+                        case 8:
+                            pictureBox1.Image = Properties.Resources._8;
+                            break;
+                        case 9:
+                            pictureBox1.Image = Properties.Resources._9;
+                            break;
+                        case 10:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._0;
+                            break;
+                        case 11:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._1;
+                            break;
+                        case 12:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._2;
+                            break;
+                        case 13:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._3;
+                            break;
+                        case 14:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._4;
+                            break;
+                        case 15:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._5;
+                            break;
+                        case 16:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._6;
+                            break;
+                        case 17:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._7;
+                            break;
+                        case 18:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._8;
+                            break;
+                        case 19:
+                            pictureBox1.Image = Properties.Resources._1;
+                            pictureBox2.Image = Properties.Resources._9;
+                            break;
+                        case 20:
+                            pictureBox1.Image = Properties.Resources._2;
+                            pictureBox2.Image = Properties.Resources._0;
+                            break;
+                    }
+                });
             }
             else
             {
-                pictureBox1.Visible = false;
-                pictureBox2.Visible = false;
+                Invoke(() =>
+                {
+                    pictureBox1.Visible = false;
+                    pictureBox2.Visible = false;
+                });
+                
             }
         }
 
-        List<PictureBox> pbs = new List<PictureBox>();
+        List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
         void UpdatePlayerBlock(string[] players, string myName)
         {
             while (pbs.Count < players.Length)
