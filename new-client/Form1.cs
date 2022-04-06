@@ -307,7 +307,7 @@ namespace new_client
                         picture.Size = new Size(pb.w, pb.h);
                         picture.Location = new Point(pb.x, pb.y);
                         picture.Name = pb.name;
-                        picture.BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
+                        picture.BackColor = (pb.name == myName ? Color.MediumTurquoise : Color.OrangeRed);
 
                         label.Text = "HP: " + Convert.ToString(pb.heart);
                         label.Size = new Size(75, 20);
