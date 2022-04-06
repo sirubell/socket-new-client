@@ -18,7 +18,7 @@ namespace new_client
             {
                 case Keys.A:
                 case Keys.Left:
-                    left=true;
+                    left = true;
                     dir = "2";
                     break;
                 case Keys.D:
@@ -32,14 +32,14 @@ namespace new_client
         private void Form1_KeyUp(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
-                right = false;
-            else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
                 left = false;
+            else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+                right = false;
 
-            dir = "1";
+            if(right!=left)
+                dir = left ? "2" : "3";
+            else dir = "1";
 
-            if(right^left)
-                dir = right ? "2" : "3";
         }
 
         bool Connect(string server)
@@ -286,7 +286,6 @@ namespace new_client
                     {
                         temp.pictureBox.Location = new Point(pb.x, pb.y);
                         temp.label.Location = new Point(pb.x, pb.y - 20);
-
                         temp.label.Text = "HP: " + Convert.ToString(pb.heart);
                     });
 
@@ -310,6 +309,7 @@ namespace new_client
                     Invoke(() => Controls.Add(label));
                     Invoke(() =>
                     {
+                        picture.BringToFront();
                         picture.Size = new Size(pb.w, pb.h);
                         picture.Location = new Point(pb.x, pb.y);
                         picture.Name = pb.name;
