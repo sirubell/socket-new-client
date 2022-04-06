@@ -59,19 +59,23 @@ namespace new_client
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             Size = new Size(600, 900);
             richTextBox1.Size = new Size(250, 70);
             richTextBox1.Location = new Point(10,10);
             label1.Size = new Size(112, 32);
-            label1.Location = new Point(250, 30);
+            label1.Location = new Point(240, 45);
             label1.Font = new Font("Segoe UI", 14);
-            textBoxServerIP.Size = new Size(165, 45);
-            textBoxServerIP.Location = new Point(380, 30);
-            textBoxServerIP.Font = new Font("Segoe UI", 14);
+            textBoxServerIP.Size = new Size(185, 45);
+            textBoxServerIP.Location = new Point(380, 45);
+            textBoxServerIP.Font = new Font("Segoe UI", 13);
             btnConnect.Size = new Size(120, 40);
-            btnConnect.Location = new Point(400, 80);
+            btnConnect.Location = new Point(400, 100);
             label2.Size = new Size(200, 50);
-            label2.Location = new Point(30, 30);
+            label2.Location = new Point(30, 40);
             label2.Font = new Font("Segoe UI", 16);
             richTextBox1.Visible=false;
         }
@@ -312,11 +316,13 @@ namespace new_client
                     Invoke(() => Controls.Add(label));
                     Invoke(() =>
                     {
+                        picture.BackColor = Color.Transparent;
                         picture.Size = new Size(pb.w, pb.h);
                         picture.Location = new Point(pb.x, pb.y);
                         picture.Name = pb.name;
                         picture.BackColor = (pb.name == myName ? Color.MediumTurquoise : Color.OrangeRed);
 
+                        label.BackColor = Color.Transparent;
                         label.Text = "HP: " + Convert.ToString(pb.heart);
                         label.Size = new Size(75, 20);
                         label.Location = new Point(pb.x - 10, pb.y - 20);
