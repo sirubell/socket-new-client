@@ -7,12 +7,13 @@ namespace new_client
         bool left = false;
         bool right = false;
         string dir = "1";
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Form1_KeyDown(object? sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -29,7 +30,7 @@ namespace new_client
             }
         }
 
-        private void Form1_KeyUp(object? sender, KeyEventArgs e)
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
                 left = false;
@@ -39,7 +40,6 @@ namespace new_client
             if(right!=left)
                 dir = left ? "2" : "3";
             else dir = "1";
-
         }
 
         bool Connect(string server)
@@ -60,6 +60,15 @@ namespace new_client
         private void Form1_Load(object sender, EventArgs e)
         {
             Size = new Size(600, 900);
+            richTextBox1.Size = new Size(250, 70);
+            richTextBox1.Location = new Point(10,10);
+            label1.Size = new Size(112, 32);
+            label1.Location = new Point(270, 30);
+            textBoxServerIP.Size = new Size(165, 45);
+            textBoxServerIP.Location = new Point(380, 25);
+            btnConnect.Size = new Size(120, 40);
+            btnConnect.Location = new Point(400, 80);
+
         }
 
         private void Form1_Closing(object sender, EventArgs e)
@@ -397,12 +406,13 @@ namespace new_client
             if (Connect(textBoxServerIP.Text))
             {
                 textBoxServerIP.Enabled = false;
-                btnConnet.Enabled = false;
+                btnConnect.Enabled = false;
 
                 Thread t1 = new Thread(TalkToServer);
                 t1.Start();
             }
         }
+
     }
 }
 
