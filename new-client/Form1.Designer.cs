@@ -36,6 +36,7 @@ namespace new_client
             this.textBoxServerIP = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -43,7 +44,7 @@ namespace new_client
             // richTextBox1
             // 
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(13, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(170, 147);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(250, 70);
             this.richTextBox1.TabIndex = 1;
@@ -100,6 +101,17 @@ namespace new_client
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnet_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(14, 9);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(171, 45);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Waiting......";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnConnect;
@@ -108,6 +120,7 @@ namespace new_client
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(578, 844);
             this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxServerIP);
             this.Controls.Add(this.pictureBox2);
@@ -138,5 +151,6 @@ namespace new_client
         private TextBox textBoxServerIP;
         private Label label1;
         private Button btnConnect;
+        private Label label2;
     }
 }

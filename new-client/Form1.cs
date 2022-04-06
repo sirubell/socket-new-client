@@ -63,12 +63,17 @@ namespace new_client
             richTextBox1.Size = new Size(250, 70);
             richTextBox1.Location = new Point(10,10);
             label1.Size = new Size(112, 32);
-            label1.Location = new Point(270, 30);
+            label1.Location = new Point(250, 30);
+            label1.Font = new Font("Segoe UI", 14);
             textBoxServerIP.Size = new Size(165, 45);
-            textBoxServerIP.Location = new Point(380, 25);
+            textBoxServerIP.Location = new Point(380, 30);
+            textBoxServerIP.Font = new Font("Segoe UI", 14);
             btnConnect.Size = new Size(120, 40);
             btnConnect.Location = new Point(400, 80);
-
+            label2.Size = new Size(200, 50);
+            label2.Location = new Point(30, 30);
+            label2.Font = new Font("Segoe UI", 16);
+            richTextBox1.Visible=false;
         }
 
         private void Form1_Closing(object sender, EventArgs e)
@@ -126,13 +131,12 @@ namespace new_client
             string[] players = chunks[1].Split('|');
             string[] blocks = chunks[2].Split('|');
             int time_elpsed = Convert.ToInt32(chunks[3]);
-
             start_count(chunks[4].Split(' '));
-
-
-            string display = String.Join('\n', new ArraySegment<string>(chunks, 4, chunks.Length - 4));
-
-            Invoke(() => { richTextBox1.Text = display; });
+            
+            if(chunks.Length > 5)
+                Invoke(() => { label2.Text = chunks[5]; });
+            else
+                Invoke(() => { label2.Text = (time_elpsed / 1000).ToString() + "." + (time_elpsed % 1000).ToString() + " s"; });
 
             UpdatePlayerBlock(players, myName);
             UpdatePlatformBlock(blocks);
@@ -251,11 +255,6 @@ namespace new_client
                             pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._9;
-                            break;
-                        case 20:
-                            pictureBox1.BackColor = Color.Transparent;
-                            pictureBox1.Image = Properties.Resources._2;
-                            pictureBox2.Image = Properties.Resources._0;
                             break;
                     }
                 });
@@ -422,13 +421,12 @@ namespace new_client
             if (Connect(textBoxServerIP.Text))
             {
                 textBoxServerIP.Enabled = false;
-                btnConnect.Enabled = false;
+                btnConnect.Visible = false;
 
                 Thread t1 = new Thread(TalkToServer);
                 t1.Start();
             }
         }
-
     }
 }
 
