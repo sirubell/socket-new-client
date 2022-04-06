@@ -78,7 +78,6 @@ namespace new_client
             this.textBoxServerIP.Size = new System.Drawing.Size(135, 35);
             this.textBoxServerIP.TabIndex = 3;
             this.textBoxServerIP.Text = "127.0.0.1";
-            this.textBoxServerIP.DoubleClick += new System.EventHandler(this.textBoxServerIP_DoubleClick);
             // 
             // label1
             // 
