@@ -1,17 +1,15 @@
 using System.Net.Sockets;
-using System.Drawing;
 
 namespace new_client
-{ 
+{
     public partial class Form1 : Form
     {
+        bool left = false;
+        bool right = false;
         string dir = "1";
         public Form1()
         {
             InitializeComponent();
-
-            KeyDown += Form1_KeyDown;
-            KeyUp += Form1_KeyUp;
         }
 
         private void Form1_KeyDown(object? sender, KeyEventArgs e)
@@ -20,20 +18,28 @@ namespace new_client
             {
                 case Keys.A:
                 case Keys.Left:
+                    left=true;
                     dir = "2";
                     break;
                 case Keys.D:
                 case Keys.Right:
+                    right = true;
                     dir = "3";
                     break;
-
             }
         }
 
         private void Form1_KeyUp(object? sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left || e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
-                dir = "1";
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+                right = false;
+            else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+                left = false;
+
+            dir = "1";
+
+            if(right^left)
+                dir = right ? "2" : "3";
         }
 
         bool Connect(string server)
@@ -53,8 +59,8 @@ namespace new_client
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(600, 900);
-            if (!Connect("10.201.32.122"))
+            Size = new Size(600, 900);
+            if (!Connect("127.0.0.1"))
             {
                 Close();
                 return;
@@ -83,7 +89,7 @@ namespace new_client
             while (true)
             {
                 long currentTime = GetCurrentTimeMS();
-                if  (currentTime >= previousTime + 5)
+                if (currentTime >= previousTime + 5)
                 {
                     previousTime = currentTime;
 
@@ -101,7 +107,7 @@ namespace new_client
             stream.Write(data, 0, data.Length);
         }
 
-        
+
         private void ReceiveEnvironment()
         {
             Byte[] buffer = new Byte[256];
@@ -118,9 +124,9 @@ namespace new_client
             string[] players = chunks[1].Split('|');
             string[] blocks = chunks[2].Split('|');
             int time_elpsed = Convert.ToInt32(chunks[3]);
-            
+
             start_count(chunks[4].Split(' '));
-            
+
 
             string display = String.Join('\n', new ArraySegment<string>(chunks, 4, chunks.Length - 4));
 
@@ -138,7 +144,6 @@ namespace new_client
                 {
                     Invoke(() =>
                     {
-                        pictureBox1.BackColor = Color.Transparent;
                         pictureBox1.Visible = true;
                         pictureBox2.Visible = false;
                         pictureBox1.Location = new Point(200, 300);
@@ -153,7 +158,6 @@ namespace new_client
                         pictureBox1.Location = new Point(115, 300);
                         pictureBox2.Location = new Point(285, 300);
                     });
-                    
                 }
 
                 Invoke(() =>
@@ -165,72 +169,89 @@ namespace new_client
                             pictureBox1.Image = Properties.Resources._1;
                             break;
                         case 2:
-                            pictureBox1.BackColor = Color.Red;
+                            pictureBox1.BackColor = Color.IndianRed;
                             pictureBox1.Image = Properties.Resources._2;
                             break;
                         case 3:
-                            pictureBox1.BackColor = Color.Red;
+                            pictureBox1.BackColor = Color.PaleVioletRed;
                             pictureBox1.Image = Properties.Resources._3;
                             break;
                         case 4:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._4;
                             break;
                         case 5:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._5;
                             break;
                         case 6:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._6;
                             break;
                         case 7:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._7;
                             break;
                         case 8:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._8;
                             break;
                         case 9:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._9;
                             break;
                         case 10:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._0;
                             break;
                         case 11:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._1;
                             break;
                         case 12:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._2;
                             break;
                         case 13:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._3;
                             break;
                         case 14:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._4;
                             break;
                         case 15:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._5;
                             break;
                         case 16:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._6;
                             break;
                         case 17:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._7;
                             break;
                         case 18:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._8;
                             break;
                         case 19:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._9;
                             break;
                         case 20:
+                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._2;
                             pictureBox2.Image = Properties.Resources._0;
                             break;
@@ -244,7 +265,6 @@ namespace new_client
                     pictureBox1.Visible = false;
                     pictureBox2.Visible = false;
                 });
-                
             }
         }
 
@@ -315,7 +335,7 @@ namespace new_client
                 var picture = new PictureBox();
 
                 pfs.Add(picture);
-                Invoke(() =>Controls.Add(picture));
+                Invoke(() => Controls.Add(picture));
             }
             while (pfs.Count > blocks.Length)
             {
@@ -333,16 +353,11 @@ namespace new_client
                 {
                     pfs[i].Size = new Size(pf.w, pf.h);
                     pfs[i].Location = new Point(pf.x, pf.y);
-                    pfs[i].Image = (pf.type == 1 ? Properties.Resources.platform: Properties.Resources.thorn);
+                    pfs[i].Image = (pf.type == 1 ? Properties.Resources.platform : Properties.Resources.thorn);
                     pfs[i].SizeMode = PictureBoxSizeMode.StretchImage;
                 });
-                
+
             }
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
