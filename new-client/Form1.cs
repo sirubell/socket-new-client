@@ -13,6 +13,16 @@ namespace new_client
             InitializeComponent();
         }
 
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ExStyle |= 0x02000000;
+        //        return cp;
+        //    }
+        //}
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -101,7 +111,7 @@ namespace new_client
             while (true)
             {
                 long currentTime = GetCurrentTimeMS();
-                if (currentTime >= previousTime + 5)
+                if (currentTime >= previousTime + 1)
                 {
                     previousTime = currentTime;
 
@@ -317,7 +327,6 @@ namespace new_client
                     Invoke(() => Controls.Add(label));
                     Invoke(() =>
                     {
-                        picture.BackColor = Color.Transparent;
                         picture.Size = new Size(pb.w, pb.h);
                         picture.Location = new Point(pb.x, pb.y);
                         picture.Name = pb.name;
