@@ -264,26 +264,12 @@ namespace new_client
         List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
         void UpdatePlayerBlock(string[] players, string myName)
         {
-            if (players.Length == 0 || players[0] == String.Empty)
-            {
-                foreach (PlayerBlockControl pb in pbs)
-                {
-                    Invoke(() =>
-                    {
-                        Controls.Remove(pb.pictureBox);
-                        Controls.Remove(pb.label);
-                        pb.pictureBox.Dispose();
-                        pb.label.Dispose();
-                    });
-                }
-                pbs.Clear();
-                return;
-            }
-
             List<PlayerBlockControl> new_pbs = new List<PlayerBlockControl>();
 
             for (int i = 0; i < players.Length; i++)
             {
+                if (players[i] == String.Empty) continue;
+
                 string[] playerData = players[i].Split(',');
                 PlayerBlock pb = new PlayerBlock(playerData);
 
@@ -375,6 +361,8 @@ namespace new_client
 
             for (int i = 0; i < blocks.Length; i++)
             {
+                if (blocks[i] == String.Empty) continue;
+
                 string[] blockData = blocks[i].Split(',');
                 FlatformBlock pf = new FlatformBlock(blockData);
 
