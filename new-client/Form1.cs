@@ -61,6 +61,7 @@ namespace new_client
         {
             DoubleBuffered = true;
             SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             Size = new Size(600, 900);
