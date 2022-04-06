@@ -44,7 +44,7 @@ namespace new_client
 
         bool Connect(string server)
         {
-            Int32 port = 12345;
+            Int32 port = 15070;
             try
             {
                 client = new TcpClient(server, port);
