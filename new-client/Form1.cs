@@ -277,6 +277,8 @@ namespace new_client
 
             for (int i = 0; i < players.Length; i++)
             {
+                if (players[i] == String.Empty) continue;
+
                 string[] playerData = players[i].Split(',');
                 PlayerBlock pb = new PlayerBlock(playerData);
 
@@ -314,7 +316,7 @@ namespace new_client
                         picture.Size = new Size(pb.w, pb.h);
                         picture.Location = new Point(pb.x, pb.y);
                         picture.Name = pb.name;
-                        picture.BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
+                        picture.BackColor = (pb.name == myName ? Color.MediumTurquoise : Color.OrangeRed);
 
                         label.Text = "HP: " + Convert.ToString(pb.heart);
                         label.Size = new Size(75, 20);
@@ -350,12 +352,26 @@ namespace new_client
         List<PictureBox> pfs = new List<PictureBox>();
         void UpdatePlatformBlock(string[] blocks)
         {
-            if (blocks.Length == 0 || blocks[0] == String.Empty) return;
+            if (blocks.Length == 0 || blocks[0] == String.Empty)
+            {
+                foreach (PictureBox pf in pfs)
+                {
+                    Invoke(() =>
+                    {
+                        Controls.Remove(pf);
+                        pf.Dispose();
+                    });
+                }
+                pfs.Clear();
+                return;
+            }
 
             List<PictureBox> new_pfs = new List<PictureBox>();
 
             for (int i = 0; i < blocks.Length; i++)
             {
+                if (blocks[i] == String.Empty) continue;
+
                 string[] blockData = blocks[i].Split(',');
                 FlatformBlock pf = new FlatformBlock(blockData);
 
