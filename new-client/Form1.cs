@@ -394,9 +394,17 @@ namespace new_client
             pfs = new_pfs;
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void btnConnet_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = null;
+            //textBoxServerIP.Enabled = false;
+            //btnConnet.Enabled = false;
+        }
 
+        private void textBoxServerIP_DoubleClick(object sender, EventArgs e)
+        {
+            textBoxServerIP.Enabled = true;
+            btnConnet.Enabled = true;
         }
     }
 }
