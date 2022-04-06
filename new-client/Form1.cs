@@ -264,6 +264,22 @@ namespace new_client
         List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
         void UpdatePlayerBlock(string[] players, string myName)
         {
+            if (players.Length == 0 || players[0] == String.Empty)
+            {
+                foreach (PlayerBlockControl pb in pbs)
+                {
+                    Invoke(() =>
+                    {
+                        Controls.Remove(pb.pictureBox);
+                        Controls.Remove(pb.label);
+                        pb.pictureBox.Dispose();
+                        pb.label.Dispose();
+                    });
+                }
+                pbs.Clear();
+                return;
+            }
+
             List<PlayerBlockControl> new_pbs = new List<PlayerBlockControl>();
 
             for (int i = 0; i < players.Length; i++)
@@ -341,7 +357,19 @@ namespace new_client
         List<PictureBox> pfs = new List<PictureBox>();
         void UpdatePlatformBlock(string[] blocks)
         {
-            if (blocks.Length == 0 || blocks[0] == String.Empty) return;
+            if (blocks.Length == 0 || blocks[0] == String.Empty)
+            {
+                foreach (PictureBox pf in pfs)
+                {
+                    Invoke(() =>
+                    {
+                        Controls.Remove(pf);
+                        pf.Dispose();
+                    });
+                }
+                pfs.Clear();
+                return;
+            }
 
             List<PictureBox> new_pfs = new List<PictureBox>();
 
