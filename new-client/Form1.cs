@@ -60,13 +60,6 @@ namespace new_client
         private void Form1_Load(object sender, EventArgs e)
         {
             Size = new Size(600, 900);
-            if (!Connect("127.0.0.1"))
-            {
-                Close();
-                return;
-            }
-            Thread t1 = new Thread(TalkToServer);
-            t1.Start();
         }
 
         private void Form1_Closing(object sender, EventArgs e)
@@ -396,8 +389,14 @@ namespace new_client
 
         private void btnConnet_Click(object sender, EventArgs e)
         {
-            textBoxServerIP.Enabled = false;
-            btnConnet.Enabled = false;
+            if (Connect(textBoxServerIP.Text))
+            {
+                textBoxServerIP.Enabled = false;
+                btnConnet.Enabled = false;
+
+                Thread t1 = new Thread(TalkToServer);
+                t1.Start();
+            }
         }
     }
 }

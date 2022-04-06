@@ -46,7 +46,7 @@ namespace new_client
             this.richTextBox1.Location = new System.Drawing.Point(8, 8);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(154, 51);
+            this.richTextBox1.Size = new System.Drawing.Size(215, 76);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
