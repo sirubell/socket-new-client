@@ -285,15 +285,15 @@ namespace new_client
                     Invoke(() =>
                     {
                         temp.pictureBox.Location = new Point(pb.x, pb.y);
-                        temp.label.Location = new Point(pb.x, pb.y - 20);
+                        temp.label.Location = new Point(pb.x - 10, pb.y - 20);
                         temp.label.Text = "HP: " + Convert.ToString(pb.heart);
                     });
 
                     Graphics graphic = temp.pictureBox.CreateGraphics();
-                    Font drawFont = new Font("Serif", 30);
+                    Font drawFont = new Font("Serif", 16);
                     SolidBrush drawBrush = new SolidBrush(Color.Black);
-                    float x = 0.0F;
-                    float y = 20.0F;
+                    float x = 1.0F;
+                    float y = 25.0F;
                     StringFormat drawFormat = new StringFormat();
                     drawFormat.LineAlignment = StringAlignment.Center;
 
@@ -309,15 +309,20 @@ namespace new_client
                     Invoke(() => Controls.Add(label));
                     Invoke(() =>
                     {
-                        picture.BringToFront();
                         picture.Size = new Size(pb.w, pb.h);
                         picture.Location = new Point(pb.x, pb.y);
                         picture.Name = pb.name;
                         picture.BackColor = (pb.name == myName ? Color.Aqua : Color.Black);
 
                         label.Text = "HP: " + Convert.ToString(pb.heart);
-                        label.Size = new Size(70, 30);
-                        label.Location = new Point(pb.x, pb.y - 20);
+                        label.Size = new Size(75, 20);
+                        label.Location = new Point(pb.x - 10, pb.y - 20);
+
+                        if (pb.name == myName)
+                        {
+                            label.BringToFront();
+                            picture.BringToFront();
+                        }
                     });
                 }
             }
