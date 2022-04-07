@@ -303,7 +303,7 @@ namespace new_client
                     Invoke(() =>
                     {
                         temp.pictureBox.Location = new Point(pb.x, pb.y);
-                        temp.label.Location = new Point(pb.x, pb.y - 20);
+                        temp.label.Location = new Point(pb.x - 10, pb.y - 20);
                         temp.label.Text = temp.pictureBox.Name + " : " + Convert.ToString(pb.heart);
                     });
 
@@ -335,7 +335,7 @@ namespace new_client
 
                         label.BackColor = Color.Transparent;
                         label.Text = picture.Name + " : " + Convert.ToString(pb.heart);
-                        label.Size = new Size(50, 20);
+                        label.Size = new Size(75, 20);
                         label.Location = new Point(pb.x - 10, pb.y - 20);
 
                         if (pb.name == myName)
