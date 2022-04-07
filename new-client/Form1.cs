@@ -1,4 +1,5 @@
 using System.Net.Sockets;
+using System.Threading;
 
 namespace new_client
 {
@@ -107,18 +108,25 @@ namespace new_client
 
         private void TalkToServer()
         {
-            long previousTime = GetCurrentTimeMS();
+            //long previousTime = GetCurrentTimeMS();
+            //while (true)
+            //{
+            //    long currentTime = GetCurrentTimeMS();
+            //    if (currentTime >= previousTime + 5)
+            //    {
+            //        previousTime = currentTime;
+
+            //        SendDirection();
+            //        ReceiveEnvironment();
+            //    }
+            //}
             while (true)
             {
-                long currentTime = GetCurrentTimeMS();
-                if (currentTime >= previousTime + 5)
-                {
-                    previousTime = currentTime;
-
-                    SendDirection();
-                    ReceiveEnvironment();
-                }
+                SendDirection();
+                ReceiveEnvironment();
+                Thread.Sleep(10);
             }
+            
         }
 
         private void SendDirection()
