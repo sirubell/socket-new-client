@@ -13,15 +13,15 @@ namespace new_client
             InitializeComponent();
         }
 
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-        //}
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -307,15 +307,16 @@ namespace new_client
                         temp.label.Text = "HP: " + Convert.ToString(pb.heart);
                     });
 
-                    Graphics graphic = temp.pictureBox.CreateGraphics();
-                    Font drawFont = new Font("Serif", 16);
-                    SolidBrush drawBrush = new SolidBrush(Color.Black);
-                    float x = 1.0F;
-                    float y = 25.0F;
-                    StringFormat drawFormat = new StringFormat();
-                    drawFormat.LineAlignment = StringAlignment.Center;
+                    // player number
+                    //Graphics graphic = temp.pictureBox.CreateGraphics();
+                    //Font drawFont = new Font("Serif", 16);
+                    //SolidBrush drawBrush = new SolidBrush(Color.Black);
+                    //float x = 1.0F;
+                    //float y = 25.0F;
+                    //StringFormat drawFormat = new StringFormat();
+                    //drawFormat.LineAlignment = StringAlignment.Center;
 
-                    Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
+                    //Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
                 }
                 else
                 {
