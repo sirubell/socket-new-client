@@ -304,18 +304,19 @@ namespace new_client
                     {
                         temp.pictureBox.Location = new Point(pb.x, pb.y);
                         temp.label.Location = new Point(pb.x - 10, pb.y - 20);
-                        temp.label.Text = "HP: " + Convert.ToString(pb.heart);
+                        temp.label.Text = temp.pictureBox.Name + " : " + Convert.ToString(pb.heart);
                     });
 
-                    Graphics graphic = temp.pictureBox.CreateGraphics();
-                    Font drawFont = new Font("Serif", 16);
-                    SolidBrush drawBrush = new SolidBrush(Color.Black);
-                    float x = 1.0F;
-                    float y = 25.0F;
-                    StringFormat drawFormat = new StringFormat();
-                    drawFormat.LineAlignment = StringAlignment.Center;
+                    // player number
+                    //Graphics graphic = temp.pictureBox.CreateGraphics();
+                    //Font drawFont = new Font("Serif", 16);
+                    //SolidBrush drawBrush = new SolidBrush(Color.Black);
+                    //float x = 1.0F;
+                    //float y = 25.0F;
+                    //StringFormat drawFormat = new StringFormat();
+                    //drawFormat.LineAlignment = StringAlignment.Center;
 
-                    Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
+                    //Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
                 }
                 else
                 {
@@ -333,7 +334,7 @@ namespace new_client
                         picture.BackColor = (pb.name == myName ? Color.MediumTurquoise : Color.OrangeRed);
 
                         label.BackColor = Color.Transparent;
-                        label.Text = "HP: " + Convert.ToString(pb.heart);
+                        label.Text = picture.Name + " : " + Convert.ToString(pb.heart);
                         label.Size = new Size(75, 20);
                         label.Location = new Point(pb.x - 10, pb.y - 20);
 
