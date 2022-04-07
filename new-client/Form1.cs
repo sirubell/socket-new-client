@@ -111,7 +111,7 @@ namespace new_client
             while (true)
             {
                 long currentTime = GetCurrentTimeMS();
-                if (currentTime >= previousTime + 1)
+                if (currentTime >= previousTime + 5)
                 {
                     previousTime = currentTime;
 
