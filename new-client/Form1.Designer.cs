@@ -76,7 +76,7 @@ namespace new_client
             this.textBoxServerIP.Name = "textBoxServerIP";
             this.textBoxServerIP.Size = new System.Drawing.Size(165, 45);
             this.textBoxServerIP.TabIndex = 3;
-            this.textBoxServerIP.Text = "127.0.0.1";
+            this.textBoxServerIP.Text = "211.21.92.122";
             // 
             // label1
             // 
