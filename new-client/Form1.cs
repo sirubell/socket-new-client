@@ -75,20 +75,25 @@ namespace new_client
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            Size = new Size(600, 900);
+            Size = new Size(800, 900);
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox2.BackColor = Color.Transparent;
             richTextBox1.Size = new Size(250, 70);
             richTextBox1.Location = new Point(10,10);
             label1.Size = new Size(112, 32);
-            label1.Location = new Point(240, 45);
+            label1.Location = new Point(5, 107);
             label1.Font = new Font("Segoe UI", 14);
-            textBoxServerIP.Size = new Size(185, 45);
-            textBoxServerIP.Location = new Point(380, 45);
+            textBoxServerIP.Size = new Size(170, 45);
+            textBoxServerIP.Location = new Point(5, 144);
             textBoxServerIP.Font = new Font("Segoe UI", 13);
             btnConnect.Size = new Size(120, 40);
-            btnConnect.Location = new Point(400, 100);
+            btnConnect.Location = new Point(30, 200);
             label2.Size = new Size(200, 50);
-            label2.Location = new Point(30, 40);
+            label2.Location = new Point(5, 300);
             label2.Font = new Font("Segoe UI", 16);
+            player_heart.Size = new Size(155, 40);
+            player_heart.Location = new Point(5, 400);
+            player_heart.Font = new Font("Segoe UI", 12);
             richTextBox1.Visible=false;
         }
 
@@ -100,26 +105,8 @@ namespace new_client
             }
         }
 
-
-        static public long GetCurrentTimeMS()
-        {
-            return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        }
-
         private void TalkToServer()
         {
-            //long previousTime = GetCurrentTimeMS();
-            //while (true)
-            //{
-            //    long currentTime = GetCurrentTimeMS();
-            //    if (currentTime >= previousTime + 5)
-            //    {
-            //        previousTime = currentTime;
-
-            //        SendDirection();
-            //        ReceiveEnvironment();
-            //    }
-            //}
             while (true)
             {
                 SendDirection();
@@ -189,9 +176,10 @@ namespace new_client
                     });
                 }
 
+                var temp = Int32.Parse(statement[statement.Length - 1]);
                 Invoke(() =>
                 {
-                    switch (Int32.Parse(statement[statement.Length - 1]))
+                    switch (temp)
                     {
                         case 1:
                             pictureBox1.BackColor = Color.Red;
@@ -206,71 +194,56 @@ namespace new_client
                             pictureBox1.Image = Properties.Resources._3;
                             break;
                         case 4:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._4;
                             break;
                         case 5:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._5;
                             break;
                         case 6:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._6;
                             break;
                         case 7:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._7;
                             break;
                         case 8:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._8;
                             break;
                         case 9:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._9;
                             break;
                         case 10:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._0;
                             break;
                         case 11:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._1;
                             break;
                         case 12:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._2;
                             break;
                         case 13:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._3;
                             break;
                         case 14:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._4;
                             break;
                         case 15:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._5;
                             break;
                         case 16:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._6;
                             break;
                         case 17:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._7;
                             break;
                         case 18:
-                            pictureBox1.BackColor = Color.Transparent;
                             pictureBox1.Image = Properties.Resources._1;
                             pictureBox2.Image = Properties.Resources._8;
                             break;
@@ -292,10 +265,10 @@ namespace new_client
             }
         }
 
-        List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
+        List<PictureBox> pbs = new List<PictureBox>();
         void UpdatePlayerBlock(string[] players, string myName)
         {
-            List<PlayerBlockControl> new_pbs = new List<PlayerBlockControl>();
+            List<PictureBox> new_pbs = new List<PictureBox>();
 
             for (int i = 0; i < players.Length; i++)
             {
@@ -304,15 +277,15 @@ namespace new_client
                 string[] playerData = players[i].Split(',');
                 PlayerBlock pb = new PlayerBlock(playerData);
 
-                var temp = pbs.Find(x => x.pictureBox.Name == pb.name);
+                var temp = pbs.Find(x => x.Name == pb.name);
                 if (temp != null)
                 {
                     new_pbs.Add(temp);
                     Invoke(() =>
                     {
-                        temp.pictureBox.Location = new Point(pb.x, pb.y);
-                        temp.label.Location = new Point(pb.x - 10, pb.y - 20);
-                        temp.label.Text = temp.pictureBox.Name + " : " + Convert.ToString(pb.heart);
+                        temp.Location = new Point(pb.x, pb.y);
+                        if (pb.name == myName)
+                            player_heart.Text = "Heart : " + pb.heart.ToString();
                     });
 
                     // player number
@@ -329,11 +302,9 @@ namespace new_client
                 else
                 {
                     var picture = new PictureBox();
-                    var label = new Label();
-                    new_pbs.Add(new PlayerBlockControl(picture, label));
+                    new_pbs.Add(picture);
 
                     Invoke(() => Controls.Add(picture));
-                    Invoke(() => Controls.Add(label));
                     Invoke(() =>
                     {
                         picture.Size = new Size(pb.w, pb.h);
@@ -341,30 +312,22 @@ namespace new_client
                         picture.Name = pb.name;
                         picture.BackColor = (pb.name == myName ? Color.MediumTurquoise : Color.OrangeRed);
 
-                        label.BackColor = Color.Transparent;
-                        label.Text = picture.Name + " : " + Convert.ToString(pb.heart);
-                        label.Size = new Size(75, 20);
-                        label.Location = new Point(pb.x - 10, pb.y - 20);
-
                         if (pb.name == myName)
                         {
-                            label.BringToFront();
                             picture.BringToFront();
                         }
                     });
                 }
             }
 
-            foreach (PlayerBlockControl pb in pbs)
+            foreach (PictureBox pb in pbs)
             {
-                if (new_pbs.Find(x => x.pictureBox.Name == pb.pictureBox.Name) == null)
+                if (new_pbs.Find(x => x.Name == pb.Name) == null)
                 {
                     Invoke(() =>
                     {
-                        Controls.Remove(pb.pictureBox);
-                        Controls.Remove(pb.label);
-                        pb.pictureBox.Dispose();
-                        pb.label.Dispose();
+                        Controls.Remove(pb);
+                        pb.Dispose();
                     });
 
                 }
@@ -434,7 +397,6 @@ namespace new_client
                         Controls.Remove(pf);
                         pf.Dispose();
                     });
-                    
                 }
             }
 
