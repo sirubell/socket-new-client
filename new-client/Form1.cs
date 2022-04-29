@@ -127,7 +127,7 @@ namespace new_client
 
         private void ReceiveEnvironment()
         {
-            Byte[] buffer = new Byte[256];
+            Byte[] buffer = new Byte[1024];
             String responseData = String.Empty;
             NetworkStream stream = client.GetStream();
 
