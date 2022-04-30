@@ -47,9 +47,10 @@ namespace new_client
             // richTextBox1
             // 
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(2, 8);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(251, 70);
+            this.richTextBox1.Size = new System.Drawing.Size(161, 47);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             this.richTextBox1.Visible = false;
@@ -57,9 +58,10 @@ namespace new_client
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(79, 301);
+            this.pictureBox1.Location = new System.Drawing.Point(50, 196);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 199);
+            this.pictureBox1.Size = new System.Drawing.Size(127, 130);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -67,9 +69,10 @@ namespace new_client
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Location = new System.Drawing.Point(317, 301);
+            this.pictureBox2.Location = new System.Drawing.Point(202, 196);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(200, 199);
+            this.pictureBox2.Size = new System.Drawing.Size(127, 130);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -77,10 +80,9 @@ namespace new_client
             // textBoxServerIP
             // 
             this.textBoxServerIP.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxServerIP.Location = new System.Drawing.Point(11, 144);
-            this.textBoxServerIP.Margin = new System.Windows.Forms.Padding(5);
+            this.textBoxServerIP.Location = new System.Drawing.Point(7, 94);
             this.textBoxServerIP.Name = "textBoxServerIP";
-            this.textBoxServerIP.Size = new System.Drawing.Size(164, 45);
+            this.textBoxServerIP.Size = new System.Drawing.Size(106, 32);
             this.textBoxServerIP.TabIndex = 3;
             this.textBoxServerIP.Text = "127.0.0.1";
             // 
@@ -89,10 +91,9 @@ namespace new_client
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(5, 107);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(3, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 32);
+            this.label1.Size = new System.Drawing.Size(75, 21);
             this.label1.TabIndex = 4;
             this.label1.Text = "Server IP:";
             // 
@@ -100,10 +101,9 @@ namespace new_client
             // 
             this.btnConnect.BackColor = System.Drawing.Color.Transparent;
             this.btnConnect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnConnect.Location = new System.Drawing.Point(30, 199);
-            this.btnConnect.Margin = new System.Windows.Forms.Padding(5);
+            this.btnConnect.Location = new System.Drawing.Point(19, 130);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(119, 40);
+            this.btnConnect.Size = new System.Drawing.Size(76, 26);
             this.btnConnect.TabIndex = 5;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = false;
@@ -114,10 +114,9 @@ namespace new_client
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(5, 312);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Location = new System.Drawing.Point(3, 203);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(171, 45);
+            this.label2.Size = new System.Drawing.Size(116, 30);
             this.label2.TabIndex = 4;
             this.label2.Text = "Waiting......";
             // 
@@ -131,28 +130,31 @@ namespace new_client
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.richTextBox1);
             this.panel1.Controls.Add(this.textBoxServerIP);
-            this.panel1.Location = new System.Drawing.Point(600, 0);
+            this.panel1.Location = new System.Drawing.Point(382, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(180, 850);
+            this.panel1.Size = new System.Drawing.Size(115, 555);
             this.panel1.TabIndex = 6;
             // 
             // player_heart
             // 
-            this.player_heart.Location = new System.Drawing.Point(11, 400);
+            this.player_heart.Location = new System.Drawing.Point(7, 261);
+            this.player_heart.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.player_heart.Name = "player_heart";
-            this.player_heart.Size = new System.Drawing.Size(155, 40);
+            this.player_heart.Size = new System.Drawing.Size(99, 26);
             this.player_heart.TabIndex = 6;
             // 
             // Form1
             // 
             this.AcceptButton = this.btnConnect;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.BackgroundImage = global::new_client.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CausesValidation = false;
-            this.ClientSize = new System.Drawing.Size(778, 844);
+            this.ClientSize = new System.Drawing.Size(495, 550);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -160,6 +162,7 @@ namespace new_client
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";

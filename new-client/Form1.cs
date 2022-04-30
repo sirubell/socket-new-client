@@ -14,15 +14,15 @@ namespace new_client
             InitializeComponent();
         }
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;
-                return cp;
-            }
-        }
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ExStyle |= 0x02000000;
+        //        return cp;
+        //    }
+        //}
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -77,14 +77,12 @@ namespace new_client
             pictureBox1.Size = new Size(200, 200);
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.Size = new Size(200, 200);
-            richTextBox1.Size = new Size(250, 70);
-            richTextBox1.Location = new Point(10,10);
             label1.Size = new Size(100, 30);
             label1.Location = new Point(5, 100);
-            label1.Font = new Font("Segoe UI", 22);
+            label1.Font = new Font("Segoe UI", 18);
             textBoxServerIP.Size = new Size(170, 45);
             textBoxServerIP.Location = new Point(5, 144);
-            textBoxServerIP.Font = new Font("Segoe UI", 24);
+            textBoxServerIP.Font = new Font("Segoe UI", 18);
             btnConnect.Size = new Size(150, 50);
             btnConnect.Location = new Point(15, 220);
             label2.Size = new Size(200, 50);
@@ -93,6 +91,9 @@ namespace new_client
             player_heart.Size = new Size(155, 40);
             player_heart.Location = new Point(5, 400);
             player_heart.Font = new Font("Segoe UI", 20);
+
+            richTextBox1.Size = new Size(250, 70);
+            richTextBox1.Location = new Point(10,10);
             richTextBox1.Visible=false;
 
             DoubleBuffered = true;
@@ -270,10 +271,14 @@ namespace new_client
             }
         }
 
-        List<PictureBox> pbs = new List<PictureBox>();
+        List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
+        SolidBrush redBrush = new SolidBrush(Color.Orange);
+        SolidBrush blueBrush = new SolidBrush(Color.MediumTurquoise);
+
         void UpdatePlayerBlock(string[] players, string myName)
         {
-            List<PictureBox> new_pbs = new List<PictureBox>();
+            CreateGraphics().DrawImage(Properties.Resources.background, new Rectangle(0, 0, 785, 862));
+            List<PlayerBlockControl> new_pbs = new List<PlayerBlockControl>();
 
             for (int i = 0; i < players.Length; i++)
             {
@@ -282,16 +287,20 @@ namespace new_client
                 string[] playerData = players[i].Split(',');
                 PlayerBlock pb = new PlayerBlock(playerData);
 
-                var temp = pbs.Find(x => x.Name == pb.name);
-                if (temp != null)
+                var player = pbs.Find(x => x.name == pb.name);
+                if (player == null)
+                    player = new PlayerBlockControl(CreateGraphics(), pb.name);
+
+                new_pbs.Add(player);
+
+                if (pb.name == myName)
                 {
-                    new_pbs.Add(temp);
-                    Invoke(() =>
-                    {
-                        temp.Location = new Point(pb.x, pb.y);
-                        if (pb.name == myName)
-                            player_heart.Text = "Heart : " + pb.heart.ToString();
-                    });
+                    player.graphic.FillRectangle(blueBrush, new Rectangle(pb.x, pb.y, pb.h, pb.w));
+                    Invoke(() => player_heart.Text = "Heart : " + pb.heart.ToString());
+                }
+                else
+                    player.graphic.FillRectangle(redBrush, new Rectangle(pb.x, pb.y, pb.h, pb.w));
+
 
                     // player number
                     //Graphics graphic = temp.pictureBox.CreateGraphics();
@@ -303,39 +312,12 @@ namespace new_client
                     //drawFormat.LineAlignment = StringAlignment.Center;
 
                     //Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
-                }
-                else
-                {
-                    var picture = new PictureBox();
-                    new_pbs.Add(picture);
-
-                    Invoke(() => Controls.Add(picture));
-                    Invoke(() =>
-                    {
-                        picture.Size = new Size(pb.w, pb.h);
-                        picture.Location = new Point(pb.x, pb.y);
-                        picture.Name = pb.name;
-                        picture.BackColor = (pb.name == myName ? Color.MediumTurquoise : Color.OrangeRed);
-
-                        if (pb.name == myName)
-                        {
-                            picture.BringToFront();
-                        }
-                    });
-                }
             }
 
-            foreach (PictureBox pb in pbs)
+            foreach (PlayerBlockControl pb in pbs)
             {
-                if (new_pbs.Find(x => x.Name == pb.Name) == null)
-                {
-                    Invoke(() =>
-                    {
-                        Controls.Remove(pb);
-                        pb.Dispose();
-                    });
-
-                }
+                if (new_pbs.Find(x => x.name == pb.name) == null)
+                    pb.graphic.Dispose();
             }
 
             pbs = new_pbs;
@@ -444,13 +426,13 @@ class PlayerBlock
 
 class PlayerBlockControl
 {
-    public PictureBox pictureBox;
-    public Label label;
+    public Graphics graphic;
+    public String name;
 
-    public PlayerBlockControl(PictureBox _pictureBox, Label _label)
+    public PlayerBlockControl(Graphics _graphic, String _name)
     {
-        pictureBox = _pictureBox;
-        label = _label;
+        graphic = _graphic;
+        name = _name;
     }
 }
 
