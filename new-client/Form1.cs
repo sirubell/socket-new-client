@@ -271,14 +271,14 @@ namespace new_client
             }
         }
 
-        List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
+        //List<PlayerBlockControl> pbs = new List<PlayerBlockControl>();
         SolidBrush redBrush = new SolidBrush(Color.Orange);
         SolidBrush blueBrush = new SolidBrush(Color.MediumTurquoise);
 
         void UpdatePlayerBlock(string[] players, string myName)
         {
             CreateGraphics().DrawImage(Properties.Resources.background, new Rectangle(0, 0, 785, 862));
-            List<PlayerBlockControl> new_pbs = new List<PlayerBlockControl>();
+            //List<PlayerBlockControl> new_pbs = new List<PlayerBlockControl>();
 
             for (int i = 0; i < players.Length; i++)
             {
@@ -287,19 +287,19 @@ namespace new_client
                 string[] playerData = players[i].Split(',');
                 PlayerBlock pb = new PlayerBlock(playerData);
 
-                var player = pbs.Find(x => x.name == pb.name);
-                if (player == null)
-                    player = new PlayerBlockControl(CreateGraphics(), pb.name);
+                //var player = pbs.Find(x => x.name == pb.name);
+                //if (player == null)
+                //    player = new PlayerBlockControl(CreateGraphics(), pb.name);
 
-                new_pbs.Add(player);
+                //new_pbs.Add(player);
 
                 if (pb.name == myName)
                 {
-                    player.graphic.FillRectangle(blueBrush, new Rectangle(pb.x, pb.y, pb.h, pb.w));
+                    CreateGraphics().FillRectangle(blueBrush, new Rectangle(pb.x, pb.y, pb.h, pb.w));
                     Invoke(() => player_heart.Text = "Heart : " + pb.heart.ToString());
                 }
                 else
-                    player.graphic.FillRectangle(redBrush, new Rectangle(pb.x, pb.y, pb.h, pb.w));
+                    CreateGraphics().FillRectangle(redBrush, new Rectangle(pb.x, pb.y, pb.h, pb.w));
 
 
                     // player number
@@ -314,13 +314,13 @@ namespace new_client
                     //Invoke(() => graphic.DrawString(pb.name, drawFont, drawBrush, x, y, drawFormat));
             }
 
-            foreach (PlayerBlockControl pb in pbs)
-            {
-                if (new_pbs.Find(x => x.name == pb.name) == null)
-                    pb.graphic.Dispose();
-            }
+            //foreach (PlayerBlockControl pb in pbs)
+            //{
+            //    if (new_pbs.Find(x => x.name == pb.name) == null)
+            //        pb.graphic.Dispose();
+            //}
 
-            pbs = new_pbs;
+            //pbs = new_pbs;
         }
 
         List<PictureBox> pfs = new List<PictureBox>();
