@@ -70,12 +70,9 @@ namespace new_client
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DoubleBuffered = true;
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             Size = new Size(800, 900);
+            panel1.Size = new Size(180, 850);
+            panel1.Location = new Point(600, 0);
             pictureBox1.BackColor = Color.Transparent;
             pictureBox2.BackColor = Color.Transparent;
             richTextBox1.Size = new Size(250, 70);
@@ -95,6 +92,12 @@ namespace new_client
             player_heart.Location = new Point(5, 400);
             player_heart.Font = new Font("Segoe UI", 12);
             richTextBox1.Visible=false;
+
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
         private void Form1_Closing(object sender, EventArgs e)
