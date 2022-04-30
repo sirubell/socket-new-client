@@ -74,23 +74,25 @@ namespace new_client
             panel1.Size = new Size(200, 900);
             panel1.Location = new Point(600, 0);
             pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Size = new Size(200, 200);
             pictureBox2.BackColor = Color.Transparent;
+            pictureBox2.Size = new Size(200, 200);
             richTextBox1.Size = new Size(250, 70);
             richTextBox1.Location = new Point(10,10);
-            label1.Size = new Size(112, 32);
-            label1.Location = new Point(5, 107);
-            label1.Font = new Font("Segoe UI", 14);
+            label1.Size = new Size(100, 30);
+            label1.Location = new Point(5, 100);
+            label1.Font = new Font("Segoe UI", 22);
             textBoxServerIP.Size = new Size(170, 45);
             textBoxServerIP.Location = new Point(5, 144);
-            textBoxServerIP.Font = new Font("Segoe UI", 13);
-            btnConnect.Size = new Size(120, 40);
-            btnConnect.Location = new Point(30, 200);
+            textBoxServerIP.Font = new Font("Segoe UI", 24);
+            btnConnect.Size = new Size(150, 50);
+            btnConnect.Location = new Point(15, 220);
             label2.Size = new Size(200, 50);
             label2.Location = new Point(5, 300);
-            label2.Font = new Font("Segoe UI", 16);
+            label2.Font = new Font("Segoe UI", 24);
             player_heart.Size = new Size(155, 40);
             player_heart.Location = new Point(5, 400);
-            player_heart.Font = new Font("Segoe UI", 12);
+            player_heart.Font = new Font("Segoe UI", 20);
             richTextBox1.Visible=false;
 
             DoubleBuffered = true;
@@ -165,7 +167,7 @@ namespace new_client
                     {
                         pictureBox1.Visible = true;
                         pictureBox2.Visible = false;
-                        pictureBox1.Location = new Point(200, 300);
+                        pictureBox1.Location = new Point(200, 250);
                     });
                 }
                 else
@@ -174,8 +176,8 @@ namespace new_client
                     {
                         pictureBox1.Visible = true;
                         pictureBox2.Visible = true;
-                        pictureBox1.Location = new Point(115, 300);
-                        pictureBox2.Location = new Point(285, 300);
+                        pictureBox1.Location = new Point(100, 250);
+                        pictureBox2.Location = new Point(300, 250);
                     });
                 }
 
