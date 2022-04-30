@@ -71,7 +71,7 @@ namespace new_client
         private void Form1_Load(object sender, EventArgs e)
         {
             Size = new Size(800, 900);
-            panel1.Size = new Size(180, 850);
+            panel1.Size = new Size(200, 900);
             panel1.Location = new Point(600, 0);
             pictureBox1.BackColor = Color.Transparent;
             pictureBox2.BackColor = Color.Transparent;
